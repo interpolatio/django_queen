@@ -1,3 +1,5 @@
 from django.contrib import admin
 
-# Register your models here.
+from queen_app.models import Desk
+
+admin.site.register(Desk)
