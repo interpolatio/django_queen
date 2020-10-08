@@ -11,9 +11,14 @@ def index(request):
         print("button")
         queen = queen_lib.QueenClass(8)
         queen.find(0,0)
-        b = Desk()
-        b.set_rank(queen.all_solution[1])
-        b.save()
+
+        all_desk = []
+        for solution in queen.all_solution:
+            one_desk = Desk()
+            one_desk.set_rank(solution)
+            all_desk.append(one_desk)
+
+        Desk.objects.bulk_create(all_desk, ignore_conflicts=True)
         #queen.all_solution[0]
     desk = Desk.objects.all()
     return render(request, 'queen_app/detail.html', {'desk': desk})
