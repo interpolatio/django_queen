@@ -7,6 +7,8 @@ from .forms import LoginForm
 from django.views import generic
 import queen_app.queen as queen_lib
 from queen_app.models import Desk
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 
 def user_login(request):
@@ -29,6 +31,9 @@ def user_login(request):
 
 
 def index(request):
+    if not request.user.is_authenticated:
+        print(reverse('queen:login'))
+        return HttpResponseRedirect(reverse('queen:login'))
     if (request.GET.get('work')):
         print("button")
         queen = queen_lib.QueenClass(8)
