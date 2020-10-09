@@ -1,7 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+{% extends "base.html" %}
+{% block title %}Log-in{% endblock %}
+{% block content %}
     <title>Title</title>
 
     <form method="get">
@@ -10,8 +9,5 @@
     {% for i in desk.all %}
         <li>{{ i.get_rank }}</li>
     {% endfor %}
-</head>
-<body>
 
-</body>
-</html>
+{% endblock %}

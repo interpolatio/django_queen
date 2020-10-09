@@ -9,6 +9,7 @@ import queen_app.queen as queen_lib
 from queen_app.models import Desk
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.contrib.auth import logout
 
 
 def user_login(request):
@@ -20,7 +21,7 @@ def user_login(request):
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    return HttpResponse('Authenticated successfully')
+                    return HttpResponseRedirect(reverse('queen:index'))
                 else:
                     return HttpResponse('Disabled account')
             else:
@@ -29,10 +30,11 @@ def user_login(request):
         form = LoginForm()
     return render(request, 'queen_app/login.html', {'form': form})
 
+def logout_view(request):
+    logout(request)
 
 def index(request):
     if not request.user.is_authenticated:
-        print(reverse('queen:login'))
         return HttpResponseRedirect(reverse('queen:login'))
     if (request.GET.get('work')):
         print("button")
