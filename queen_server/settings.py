@@ -70,6 +70,8 @@ TEMPLATES = [
     },
 ]
 
+LOGIN_REDIRECT_URL = '/queen/'
+
 WSGI_APPLICATION = 'queen_server.wsgi.application'
 
 
